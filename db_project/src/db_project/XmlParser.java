@@ -51,25 +51,39 @@ public class XmlParser {
 		    	try {
 		     Element element = (Element) nodeList.item(i);
 		    
-		 	String restName = this.getTagValue("È­Àå½Ç¸í", element);
+		 	String restName = this.getTagValue("í™”ì¥ì‹¤ëª…", element);
 		 	String restAd;
-		 	restAd = this.getTagValue("¼ÒÀçÁöµµ·Î¸íÁÖ¼Ò", element);
-		 	if(this.getTagValue("¼ÒÀçÁöµµ·Î¸íÁÖ¼Ò", element)==null) {
-		 		restAd = this.getTagValue("¼ÒÀçÁöÁö¹øÁÖ¼Ò", element);
-		 	}else {restAd = this.getTagValue("¼ÒÀçÁöµµ·Î¸íÁÖ¼Ò", element);}
-		 	if(!restAd.substring(0,2).equals("¼­¿ï")) continue;	
-		 	int disM_b = Integer.parseInt(this.getTagValue("³²¼º¿ë-Àå¾ÖÀÎ¿ë´ëº¯±â¼ö", element));
-		 	int disM_u = Integer.parseInt(this.getTagValue("³²¼º¿ë-Àå¾ÖÀÎ¿ë¼Òº¯±â¼ö", element));
-		 	int disF = Integer.parseInt(this.getTagValue("¿©¼º¿ë-Àå¾ÖÀÎ¿ë´ëº¯±â¼ö", element));
-		 	String open = this.getTagValue("°³¹æ½Ã°£", element);				
-		 	float lat = Float.parseFloat(this.getTagValue("À§µµ", element));
-		 	float longi = Float.parseFloat(this.getTagValue("°æµµ", element));
+		 	restAd = this.getTagValue("ì†Œì¬ì§€ë„ë¡œëª…ì£¼ì†Œ", element);
+		 	if(this.getTagValue("ì†Œì¬ì§€ë„ë¡œëª…ì£¼ì†Œ", element)==null) {
+		 		restAd = this.getTagValue("ì†Œì¬ì§€ì§€ë²ˆì£¼ì†Œ", element);
+		 	}else {restAd = this.getTagValue("ì†Œì¬ì§€ë„ë¡œëª…ì£¼ì†Œ", element);}
+		 	if(!restAd.substring(0,2).equals("ì„œìš¸")) continue;	
+		 	int disM_b = Integer.parseInt(this.getTagValue("ë‚¨ì„±ìš©-ì¥ì• ì¸ìš©ëŒ€ë³€ê¸°ìˆ˜", element));
+		 	int disM_u = Integer.parseInt(this.getTagValue("ë‚¨ì„±ìš©-ì¥ì• ì¸ìš©ì†Œë³€ê¸°ìˆ˜", element));
+		 	int disF = Integer.parseInt(this.getTagValue("ì—¬ì„±ìš©-ì¥ì• ì¸ìš©ëŒ€ë³€ê¸°ìˆ˜", element));
+		 	String open = this.getTagValue("ê°œë°©ì‹œê°„", element);				
+		 	float lat = Float.parseFloat(this.getTagValue("ìœ„ë„", element));
+		 	float longi = Float.parseFloat(this.getTagValue("ê²½ë„", element));
 		    System.out.println(restName+" "+restAd+" "+disM_b+" "+disM_u+" "+disF+" "+open+" "+lat+" "+longi);
 		    listOfData.add(new XmlData(restName, restAd, disM_b,disM_u,disF,open, lat, longi));
 		    }catch(NullPointerException npe) {
 		    		//System.out.println(i+ "null");
 		    }
 		   }
+		   
+		  // ì¤‘ë³µ ì²˜ë¦¬
+		   int dup = 0;
+		   for (int j = 0; j < listOfData.size(); j++) {
+			   for (int k = j+1; k < listOfData.size(); k++) {
+				   int count = 1;
+				   if (listOfData.get(j).getRestName().equals(listOfData.get(k).getRestName()) && listOfData.get(j).getRestAd().equals(listOfData.get(k).getRestAd())) {
+					   listOfData.get(k).setRestName(listOfData.get(j).getRestName()+"[ì¤‘ë³µ"+(count++)+"]");
+					   dup++;
+				   }
+			   }
+		   }
+		  System.out.println(dup+"ê°œì˜ ì¤‘ë³µì´ ì²˜ë¦¬ë˜ì—ˆìŠµë‹ˆë‹¤. restName -> restName[ì¤‘ë³µn]");
+		   
 		  return listOfData;
 		 }
 
