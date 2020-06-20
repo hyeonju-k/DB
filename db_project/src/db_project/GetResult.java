@@ -22,13 +22,15 @@ public class GetResult {
 
 	 public static void main(String[] args) throws SQLException {
 	  // TODO Auto-generated method stub
-	  File file = new File("Àü±¹°øÁßÈ­Àå½ÇÇ¥ÁØµ¥ÀÌÅÍ.xml");
+	  File file = new File("ì „êµ­ê³µì¤‘í™”ì¥ì‹¤í‘œì¤€ë°ì´í„°.xml");
 	  XmlParser xmlParser = new XmlParser(file);
 	  List<XmlData> tmp = xmlParser.parse("record");
 	  
 	  ConnectDB connectDB = new ConnectDB(); 											// db
 	  Connection conn = ConnectDB.getConnection();										// db
 	  String sql = "insert into restroom values(?,?,?,?,?,?,?,?)";						// db
+	  
+	  int numOfInst = 0;
 	  try {
 	   for(int i=0; i<tmp.size() ; i++){
 	    PreparedStatement stmt = conn.prepareStatement(sql);
@@ -41,7 +43,7 @@ public class GetResult {
 	    stmt.setFloat(7,  tmp.get(i).getLat());
 	    stmt.setFloat(8,  tmp.get(i).getLongi());
 	    stmt.executeUpdate();
-	    System.out.println("sucess to save");
+	    System.out.println("sucess to save["+(++numOfInst)+"]");
 	   }
 	  } catch (SQLException e) {
 	   // TODO Auto-generated catch block
@@ -98,23 +100,23 @@ class DBFrame extends JFrame{
 		
 		
 		busPanel = new JPanel();
-		JLabel stationLabel = new JLabel("¹ö½ºÁ¤·ùÀå ÀÌ¸§ (ÇÊ¼ö)  ");
-		stationName = new JTextField("¹ö½ºÁ¤·ùÀå ÀÌ¸§ ", 20);
-		stationLabel.setFont(new Font("ÈŞ¸ÕÆíÁöÃ¼", Font.BOLD, 26));
+		JLabel stationLabel = new JLabel("ë²„ìŠ¤ì •ë¥˜ì¥ ì´ë¦„ (í•„ìˆ˜)  ");
+		stationName = new JTextField("ë²„ìŠ¤ì •ë¥˜ì¥ ì´ë¦„ ", 20);
+		stationLabel.setFont(new Font("íœ´ë¨¼í¸ì§€ì²´", Font.BOLD, 26));
 		busPanel.add(stationLabel);
 		busPanel.add(stationName);
 		contentPane.add(busPanel);
 		
 		genderPanel = new JPanel();
-		JLabel genderLabel = new JLabel("¼ºº° (¼±ÅÃ)  ");
-		genderLabel.setFont(new Font("ÈŞ¸ÕÆíÁöÃ¼", Font.BOLD, 26));
+		JLabel genderLabel = new JLabel("ì„±ë³„ (ì„ íƒ)  ");
+		genderLabel.setFont(new Font("íœ´ë¨¼í¸ì§€ì²´", Font.BOLD, 26));
 		genderPanel.add(genderLabel);
 		genderGroup = new ButtonGroup();
-		JRadioButton mButton = new JRadioButton("³²¼º", false);
+		JRadioButton mButton = new JRadioButton("ë‚¨ì„±", false);
 		genderGroup.add(mButton);
-		JRadioButton fButton = new JRadioButton("¿©¼º", false);
+		JRadioButton fButton = new JRadioButton("ì—¬ì„±", false);
 		genderGroup.add(fButton);
-		JRadioButton xButton = new JRadioButton("¹«°ü", false);
+		JRadioButton xButton = new JRadioButton("ë¬´ê´€", false);
 		genderGroup.add(xButton);
 		genderPanel.add(mButton);
 		genderPanel.add(fButton);
@@ -123,30 +125,30 @@ class DBFrame extends JFrame{
 		
 		
 		/*
-		male = new JCheckBox("³²¼º");
-		female = new JCheckBox("¿©¼º");
+		male = new JCheckBox("ë‚¨ì„±");
+		female = new JCheckBox("ì—¬ì„±");
 		genderPanel.add(genderLabel);
 		genderPanel.add(male);
 		genderPanel.add(female);
 		contentPane.add(genderPanel);
 	*/
 		disPanel = new JPanel();
-		JLabel disLabel = new JLabel("Àå¾ÖÀ¯¹« (¼±ÅÃ)    ");
-		disLabel.setFont(new Font("ÈŞ¸ÕÆíÁöÃ¼", Font.BOLD, 26));
-		dis = new JCheckBox("Àå¾ÖÀÎ");
+		JLabel disLabel = new JLabel("ì¥ì• ìœ ë¬´ (ì„ íƒ)    ");
+		disLabel.setFont(new Font("íœ´ë¨¼í¸ì§€ì²´", Font.BOLD, 26));
+		dis = new JCheckBox("ì¥ì• ì¸");
 		disPanel.add(disLabel);
 		disPanel.add(dis);
 		contentPane.add(disPanel);
 				
 		buttonPanel = new JPanel();
-		button = new JButton("È­Àå½ÇÃ£±â");
+		button = new JButton("í™”ì¥ì‹¤ì°¾ê¸°");
 		button.setBackground(Color.PINK);
 		buttonPanel.add(button);
 		contentPane.add(buttonPanel);
 		
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// °á°úÃ¢ ¶ç¿ì±â
+				// ê²°ê³¼ì°½ ë„ìš°ê¸°
 				String Name = stationName.getText();
 				result = new queryResult(Name);
 			}
@@ -159,9 +161,9 @@ class DBFrame extends JFrame{
 }
 
 
-// °á°úÃ¢
+// ê²°ê³¼ì°½
 class queryResult extends JDialog{
-	JLabel test = new JLabel("Å×½ºÆ®");
+	JLabel test = new JLabel("í…ŒìŠ¤íŠ¸");
 	
 	public queryResult(String str) {
 		
