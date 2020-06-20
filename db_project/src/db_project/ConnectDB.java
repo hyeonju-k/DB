@@ -33,9 +33,12 @@ public class ConnectDB {
 			conn = DriverManager.getConnection(url,user,password);
 			stmt = conn.createStatement();
 			
-		//	  String createR = "create table restroom(restName varchar(50) key,restAd varchar(50) key, disM_b int,disM_u int,disF int,open varchar(50),latitude numeric(2,10),longitude numeric(3,10),primary key(restName,restAd));";
+			String createR = "create table restroom(restName varchar(50), restAd varchar(50), "
+					+ "disM_b int, disM_u int, disF int, open varchar(50), "
+					+ "latitude float(20), longitude float(20), primary key(restName, restAd));";
 			  
-		//	 stmt.executeUpdate(createR); 
+		    stmt.executeUpdate(createR); 
+		    
 			stmt.close();
 			conn.close();
 		}catch(SQLException ex) {
