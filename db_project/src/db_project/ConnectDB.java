@@ -37,7 +37,7 @@ public class ConnectDB {
 					+ "disM_b int, disM_u int, disF int, open varchar(50), "
 					+ "latitude float(20), longitude float(20), primary key(restName, restAd));";
 			  
-		    stmt.executeUpdate(createR); 
+		    //stmt.executeUpdate(createR); 
 		    
 			stmt.close();
 			conn.close();
