@@ -51,17 +51,17 @@ public class XmlParser {
 		    	try {
 		     Element element = (Element) nodeList.item(i);
 		    
-		 	String restName = this.getTagValue("화장실명", element);
-		 	String restAd;
+		     String restName = this.getTagValue("화장실명", element);
+			String restAd;
 		 	restAd = this.getTagValue("소재지도로명주소", element);
 		 	if(this.getTagValue("소재지도로명주소", element)==null) {
-		 		restAd = this.getTagValue("소재지지번주소", element);
-		 	}else {restAd = this.getTagValue("소재지도로명주소", element);}
-		 	if(!restAd.substring(0,2).equals("서울")) continue;	
+			 	restAd = this.getTagValue("소재지지번주소", element);
+			 }else {restAd = this.getTagValue("소재지도로명주소", element);}
+			if(!restAd.substring(0,2).equals("서울")) continue;	
 		 	int disM_b = Integer.parseInt(this.getTagValue("남성용-장애인용대변기수", element));
 		 	int disM_u = Integer.parseInt(this.getTagValue("남성용-장애인용소변기수", element));
 		 	int disF = Integer.parseInt(this.getTagValue("여성용-장애인용대변기수", element));
-		 	String open = this.getTagValue("개방시간", element);				
+			String open = this.getTagValue("개방시간", element);				
 		 	float lat = Float.parseFloat(this.getTagValue("위도", element));
 		 	float longi = Float.parseFloat(this.getTagValue("경도", element));
 		    System.out.println(restName+" "+restAd+" "+disM_b+" "+disM_u+" "+disF+" "+open+" "+lat+" "+longi);
@@ -71,7 +71,7 @@ public class XmlParser {
 		    }
 		   }
 		   
-		  // 중복 처리
+		  // 중복처리
 		   int dup = 0;
 		   for (int j = 0; j < listOfData.size(); j++) {
 			   for (int k = j+1; k < listOfData.size(); k++) {

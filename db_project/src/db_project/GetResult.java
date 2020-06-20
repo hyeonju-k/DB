@@ -43,7 +43,7 @@ public class GetResult {
 	    stmt.setFloat(7,  tmp.get(i).getLat());
 	    stmt.setFloat(8,  tmp.get(i).getLongi());
 	    stmt.executeUpdate();
-	    System.out.println("sucess to save["+(++numOfInst)+"]");
+	    System.out.println("success to save["+(++numOfInst)+"]");
 	   }
 	  } catch (SQLException e) {
 	   // TODO Auto-generated catch block
@@ -70,11 +70,7 @@ class DBFrame extends JFrame{
 	private JTextField stationName;
 	
 	private JPanel genderPanel;
-	private JCheckBox male;
-	private JCheckBox female;
-	
 	private ButtonGroup genderGroup;
-	
 	
 	private JPanel buttonPanel;
 	private JButton button;
@@ -116,22 +112,13 @@ class DBFrame extends JFrame{
 		genderGroup.add(mButton);
 		JRadioButton fButton = new JRadioButton("여성", false);
 		genderGroup.add(fButton);
-		JRadioButton xButton = new JRadioButton("무관", false);
+		JRadioButton xButton = new JRadioButton("무관", true);
 		genderGroup.add(xButton);
 		genderPanel.add(mButton);
 		genderPanel.add(fButton);
 		genderPanel.add(xButton);
 		contentPane.add(genderPanel);
 		
-		
-		/*
-		male = new JCheckBox("남성");
-		female = new JCheckBox("여성");
-		genderPanel.add(genderLabel);
-		genderPanel.add(male);
-		genderPanel.add(female);
-		contentPane.add(genderPanel);
-	*/
 		disPanel = new JPanel();
 		JLabel disLabel = new JLabel("장애유무 (선택)    ");
 		disLabel.setFont(new Font("휴먼편지체", Font.BOLD, 26));
@@ -141,7 +128,7 @@ class DBFrame extends JFrame{
 		contentPane.add(disPanel);
 				
 		buttonPanel = new JPanel();
-		button = new JButton("화장실찾기");
+		button = new JButton("�화장실찾기");
 		button.setBackground(Color.PINK);
 		buttonPanel.add(button);
 		contentPane.add(buttonPanel);
