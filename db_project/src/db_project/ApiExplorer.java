@@ -1,6 +1,7 @@
 package db_project;
 
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -10,6 +11,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.*;
+import org.xml.sax.InputSource;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -40,18 +42,18 @@ public class ApiExplorer {
         rd.close();
         conn.disconnect();
         System.out.println(sb.toString()); 
+        String stationData = sb.toString();
    
         ArrayList<busData> busStation =new ArrayList<busData>();
       
-
         try {
-    	if(rd != null) {
+    	if(stationData != null) {
+    		
     		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     		DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-    		Document doc = documentBuilder.parse(line);
-    		
+    		Document doc = documentBuilder.parse(new InputSource(new StringReader(stationData)));
     		Element element = doc.getDocumentElement();
-    		
+    	
     		NodeList items1 = element.getElementsByTagName("stationId");
     		NodeList items2 = element.getElementsByTagName("stationName");
     		NodeList items3 = element.getElementsByTagName("x");
@@ -82,6 +84,8 @@ public class ApiExplorer {
                 Float itemValue4 = Float.parseFloat(text4.getNodeValue());
             
                 busStation.add(new busData(itemValue,itemValue2,itemValue3,itemValue4));
+                System.out.println(""+itemValue+"     "+itemValue2+"      "+itemValue3+"       "+itemValue4);
+                // 파싱 확인용 출력
     		}
 
 
